@@ -1,0 +1,27 @@
+<div class="artist-header">
+  <div class="avatar-xxl">
+    <%= image_tag @artist.image_url, class: "avatar-xxl" %>
+  </div>
+  <div class="artist-menu">
+    <h1><%= @artist.name %></h1>
+    <%= link_to "Artists", root_path  %> |
+    <%= link_to "Add Album", new_artist_album_path(@artist) %>
+  </div>
+</div>
+
+
+<div id="albums">
+  <h2>Releases</h2>
+  <% if @artist.albums.any? %>
+    <div class="container-fluid">
+      <div class="row">
+        <%= render @artist.albums %>
+        <%# @artist.albums.each do |album| %>
+          <%#= render album %>
+        <%# end %>
+      </div>
+    </div>
+  <% else %>
+    <p>This artist has no releases yet!</p>
+  <% end %>
+</div>
