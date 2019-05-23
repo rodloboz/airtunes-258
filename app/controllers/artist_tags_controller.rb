@@ -6,18 +6,13 @@ class ArtistTagsController < ApplicationController
   end
 
   def create
-    name = params[:artist_tag][:tag].downcase
-    tag = Tag.find_by(name: name)
-
-    if tag
-      if !@artist.tags.include?(tag)
-        @artist.tags << tag
-      end
-
-      redirect_to @artist
-    else
-      render :new
+    names = params[:artist_tag][:tag].reject(&:empty?).map(&:downcase)
+    names.each do |name|
+      tag = Tag.find_or_create_by(name: name)
+      ArtistTag.create(artist: @artist, tag: tag)
     end
+
+    redirect_to @artist
   end
 
   private

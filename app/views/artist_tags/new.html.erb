@@ -3,7 +3,9 @@
   <div class="col-sm-6">
     <%= simple_form_for @artist_tag do |f| %>
       <%= f.input :tag, collection: Tag.list_names,
-                  include_blank: false
+                  include_blank: false,
+                  include_hidden: false,
+                  input_html: { multiple: true }
       %>
 
       <%= f.button :submit, 'Save', class: 'btn btn-primary' %>
