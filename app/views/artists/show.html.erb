@@ -4,21 +4,32 @@
   </div>
   <div class="artist-menu">
     <h1><%= @artist.name %></h1>
+    <div class="artist-tags">
+      <% @artist.tags.each do |tag| %>
+        <span class="tag"><%= tag.name %></span>
+      <% end %>
+    </div>
     <%= link_to "Artists", root_path  %> |
-    <%= link_to "Add Album", new_artist_album_path(@artist) %>
+    <%= link_to "Add Album", new_artist_album_path(@artist) %> |
+    <%= link_to "Add Tags", new_artist_tag_path(@artist) %>
   </div>
 </div>
-
 
 <div id="albums">
   <h2>Releases</h2>
   <% if @artist.albums.any? %>
     <div class="container-fluid">
       <div class="row">
-        <%= render @artist.albums %>
-        <%# @artist.albums.each do |album| %>
-          <%#= render album %>
-        <%# end %>
+        <% @artist.albums.each do |album| %>
+          <div class="col-xs-12 col-sm-4">
+            <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= album.image_url %>');">
+              <div class="card-description">
+                <h2><%= album.title %></h2>
+              </div>
+              <%= link_to "+", album_path(album), method: :delete, data: { confirm: "Are you sure?" }, class: "card-remove-link" %>
+            </div>
+          </div>
+        <% end %>
       </div>
     </div>
   <% else %>

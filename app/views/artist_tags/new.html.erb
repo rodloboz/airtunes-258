@@ -1,0 +1,12 @@
+<h1>Add tags to <%= @artist.name %></h1>
+<div class="row">
+  <div class="col-sm-6">
+    <%= simple_form_for @artist_tag do |f| %>
+      <%= f.input :tag, collection: Tag.list_names,
+                  include_blank: false
+      %>
+
+      <%= f.button :submit, 'Save', class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+</div>
