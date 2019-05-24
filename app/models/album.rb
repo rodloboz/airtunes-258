@@ -1,5 +1,7 @@
 class Album < ApplicationRecord
+  mount_uploader :photo, PhotoUploader
+
   belongs_to :artist
 
-  validates :title, :image_url, presence: true
+  validates :title, :photo, presence: true
 end

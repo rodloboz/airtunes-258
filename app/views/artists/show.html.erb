@@ -1,6 +1,6 @@
 <div class="artist-header">
   <div class="avatar-xxl">
-    <%= image_tag @artist.image_url, class: "avatar-xxl" %>
+    <%= cl_image_tag @artist.photo, class: "avatar-xxl" %>
   </div>
   <div class="artist-menu">
     <h1><%= @artist.name %></h1>

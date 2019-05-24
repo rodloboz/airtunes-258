@@ -10,9 +10,14 @@ puts "Cleaning up database..."
 puts "Seeding database..."
 
 serialized_artists = open(URL).read
-artists = JSON.parse(serialized_artists)
+artists_json = JSON.parse(serialized_artists)
 
-Artist.create!(artists)
+artists_json.each do |artist_hash|
+  artist = Artist.new(name: artist_hash["name"])
+  artist.remote_photo_url = artist_hash["image_url"]
+  artist.save!
+end
+
 puts "Created #{Artist.count} artist(s)"
 
 names.each { |name| Tag.create!(name: name) }
